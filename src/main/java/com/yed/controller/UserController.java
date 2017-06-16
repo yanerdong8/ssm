@@ -29,23 +29,23 @@ public class UserController {
 		user.setPwd("new");
 		userService.save(user);
 		map.addAttribute("list", userService.list());
-		return "/list";
+		return "test/list";
 	}
 	
 	@RequestMapping(value="/delete/{id}")
 	public String delete(ModelMap map, @PathVariable Long id){
 		userService.deleteByPrimaryKey(id);
 		map.addAttribute("list", userService.list());
-		return "/list";
+		return "test/list";
 	}
 	
 	@RequestMapping(value="/list")
 	public String list(ModelMap map){
 		map.addAttribute("list", userService.list());
-		return "/list";
+		return "test/list";
 	}
 	@RequestMapping("/Test")
 	public String test(){
-		return "/Test";
+		return "test/Test";
 	}
 }
