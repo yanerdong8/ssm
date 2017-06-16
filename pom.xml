@@ -13,12 +13,12 @@
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<mybatis.version>3.2.8</mybatis.version>
 		<mybatis-spring.version>1.2.3</mybatis-spring.version>
-
+		<!-- json -->
+		<jackson.version>2.8.7</jackson.version>
 		<!--  MyBatis Generator  -->
 		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>
 		<targetResourcesProject>${basedir}/src/main/resources/mapping</targetResourcesProject>
-		<!-- json -->
-		<jackson.version>2.8.7</jackson.version>
+		
   </properties>
  <!-- 设定主仓库，按设定顺序进行查找。 -->
 	<repositories>
@@ -38,11 +38,7 @@
 	</pluginRepositories> 
 	
   <dependencies>
-    <dependency>
-    	<groupId>javax.servlet</groupId>
-    	<artifactId>servlet-api</artifactId>
-    	<version>3.0-alpha-1</version>
-    </dependency>
+    
     <!-- spring -->
     <dependency>
 			<groupId>org.springframework</groupId>
@@ -113,6 +109,13 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.driver.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -132,28 +135,93 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
-		</dependency>
-		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
 
+		
+		<!-- commons -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.driver.version}</version>
-			<scope>runtime</scope>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>
+		  
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+			<version>2.3</version>
 		</dependency>
 		
+		<!-- JSON begin -->
+	 	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<!-- JSON end -->
   </dependencies>
   <build>
     <finalName>${artifactId}</finalName>
