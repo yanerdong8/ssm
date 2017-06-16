@@ -35,7 +35,9 @@
 			</list>
 		</property>
 	</bean>
-	
+	 <!-- 静态资源 -->
+    <mvc:resources mapping="/style/**" location="/style/"/>  
+    
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
 		  p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
 		  
