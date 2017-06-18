@@ -13,12 +13,7 @@
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<mybatis.version>3.2.8</mybatis.version>
 		<mybatis-spring.version>1.2.3</mybatis-spring.version>
-		<!-- json -->
 		<jackson.version>2.8.7</jackson.version>
-		<!--  MyBatis Generator  -->
-		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>
-		<targetResourcesProject>${basedir}/src/main/resources/mapping</targetResourcesProject>
-		
   </properties>
  <!-- 设定主仓库，按设定顺序进行查找。 -->
 	<repositories>
