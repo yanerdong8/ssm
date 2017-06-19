@@ -32,7 +32,7 @@
 	-->   
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="mapperLocations" value="classpath:com/yed/mapper/*.xml"/>
+		<property name="mapperLocations" value="classpath:com/yed/common/mapper/*.xml"/>
 	</bean> 
 	<!--
 		3. mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory
@@ -40,7 +40,7 @@
 		basePackage:指定sql映射文件/接口所在的包（自动扫描）
 	-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.yed.dao"></property>
+		<property name="basePackage" value="com.yed.common.dao"></property>
 		<!-- <property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory"></property> -->
 	</bean>
 

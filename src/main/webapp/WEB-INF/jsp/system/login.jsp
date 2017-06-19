@@ -13,6 +13,42 @@
 	content="Ari Rusmanto, Isoh Design Studio, Warung Themes">
 <title>登录</title>
 <jsp:include page="/style.jsp"></jsp:include>
+<script type="text/javascript">
+function changeImg() {
+    var imgSrc = $("#codeImg");
+    var src = imgSrc.attr("src");
+    imgSrc.attr("src", chgUrl(src));
+}  
+
+//加入时间戳，去缓存机制   
+function chgUrl(url) {
+    var timestamp = (new Date()).valueOf();if ((url.indexOf("&") >= 0)) {
+        url = url + "&timestamp=" + timestamp;
+    } else {
+        url = url + "?timestamp=" + timestamp;
+    }
+    return url;
+}
+document.onkeydown=function(event){
+       var e = event || window.event || arguments.callee.caller.arguments[0];
+              
+        if(e && e.keyCode==13){ // enter 键
+        	loginFun();
+       }
+   };
+	function loginFun(){ 
+		   
+	     if($("#username").val()==""){
+			layer.tips('请输入账号!', '#username');
+		 }else if($("#userPass").val()==""){
+			layer.tips('请输入密码!', '#userPass');
+		 }else if($("#userCode").val()==""){
+			layer.tips('请输验证码!', '#userCode');
+		 }else{
+			  window.location.href="${pageContext.request.contextPath}/list"; 				
+		 }
+	};
+</script>
 </head>
 
 <body class="login tooltips">
@@ -44,10 +80,12 @@
 					class="form-control no-border input-lg rounded"
 					placeholder="输入验证码">  
 			    </div>
+			    <img style="margin-left: 10px;margin-top:8px;cursor: pointer;" id="codeImg" title="看不清换一张" alt="验证码" src="${pageContext.request.contextPath}/system/code/code" onclick="changeImg()"/>	
 			</div>
 			
 			<div class="form-group">
-				<button  type="button" class="btn btn-warning btn-lg btn-perspective btn-block">登录</button>
+				<button  onclick="loginFun()" type="button"
+					class="btn btn-warning btn-lg btn-perspective btn-block">登录</button>
 			</div>
 		</form>
 	</div>

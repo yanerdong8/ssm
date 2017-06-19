@@ -19,9 +19,9 @@
 		
 		<!--  MyBatis Generator  -->
 		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>	
-		<targetMapperPackage>com.yed.dao</targetMapperPackage>
-		<targetModelPackage>com.yed.bean</targetModelPackage>
-		<targetXMLPackage>com.yed.mapper</targetXMLPackage>
+		<targetMapperPackage>com.yed.common.dao</targetMapperPackage>
+		<targetModelPackage>com.yed.common.bean</targetModelPackage>
+		<targetXMLPackage>com.yed.common.mapper</targetXMLPackage>
 		
 		
   </properties>

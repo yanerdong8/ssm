@@ -10,7 +10,7 @@
 <body>
 	<p>jsp using javabean example</p>
 	
-	<jsp:useBean id="user" class="com.yed.bean.User"></jsp:useBean>
+	<jsp:useBean id="user" class="com.yed.common.bean.User"></jsp:useBean>
 	<jsp:setProperty property="name" name="user" value="yed"/>
 	
 	<jsp:getProperty property="name" name="user"/>

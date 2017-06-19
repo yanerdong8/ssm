@@ -1,6 +1,6 @@
-package com.yed.dao;
+package com.yed.common.dao;
 
-import com.yed.bean.User;
+import com.yed.common.bean.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);

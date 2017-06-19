@@ -1,4 +1,4 @@
-package com.yed.bean;
+package com.yed.common.bean;
 
 public class User {
     private Long id;
