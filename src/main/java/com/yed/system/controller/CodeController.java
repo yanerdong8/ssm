@@ -1,4 +1,4 @@
-package com.yed.common.controller;
+package com.yed.system.controller;
 
 import java.awt.Color;
 import java.awt.Font;
