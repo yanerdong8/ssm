@@ -10,15 +10,12 @@ public interface UserService extends BaseService<User>{
 	
 	User selectByPrimaryKey(Integer id);
 	
-    int insert(User muser, Integer[] roleId);
+    int insert(User user, Integer[] roleId);
     
-    int update(User muser, Integer[] roleId);
+    int update(User user, Integer[] roleId);
     
     int delete(Integer[] id);
     
     List<UserRole> findUserRoleByUser(User user);
-
-    List<User> findUserByRoleName(String roleName);
-
 	
 }
