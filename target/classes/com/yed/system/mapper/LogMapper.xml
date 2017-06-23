@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yed.system.dao.LogMapper">
+  <resultMap id="BaseResultMap" type="com.yed.system.model.Log">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="log_url" jdbcType="VARCHAR" property="logUrl" />
+    <result column="log_ip" jdbcType="VARCHAR" property="logIp" />
+    <result column="log_agent" jdbcType="VARCHAR" property="logAgent" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yed.system.model.Log">
+    <result column="log_param" jdbcType="LONGVARCHAR" property="logParam" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, log_url, log_ip, log_agent, user_name, begin_time, end_time
+  </sql>
+  <sql id="Blob_Column_List">
+    log_param
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yed.system.model.Log">
+    insert into sys_log (id, log_url, log_ip, 
+      log_agent, user_name, begin_time, 
+      end_time, log_param)
+    values (#{id,jdbcType=INTEGER}, #{logUrl,jdbcType=VARCHAR}, #{logIp,jdbcType=VARCHAR}, 
+      #{logAgent,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{logParam,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yed.system.model.Log">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="logUrl != null">
+        log_url,
+      </if>
+      <if test="logIp != null">
+        log_ip,
+      </if>
+      <if test="logAgent != null">
+        log_agent,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="logParam != null">
+        log_param,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logUrl != null">
+        #{logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null">
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logAgent != null">
+        #{logAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logParam != null">
+        #{logParam,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yed.system.model.Log">
+    update sys_log
+    <set>
+      <if test="logUrl != null">
+        log_url = #{logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null">
+        log_ip = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logAgent != null">
+        log_agent = #{logAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logParam != null">
+        log_param = #{logParam,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yed.system.model.Log">
+    update sys_log
+    set log_url = #{logUrl,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_agent = #{logAgent,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      log_param = #{logParam,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yed.system.model.Log">
+    update sys_log
+    set log_url = #{logUrl,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_agent = #{logAgent,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yed.system.model.Log">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="log_url" jdbcType="VARCHAR" property="logUrl" />
+    <result column="log_ip" jdbcType="VARCHAR" property="logIp" />
+    <result column="log_agent" jdbcType="VARCHAR" property="logAgent" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yed.system.model.Log">
+    <result column="log_param" jdbcType="LONGVARCHAR" property="logParam" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, log_url, log_ip, log_agent, user_name, begin_time, end_time
+  </sql>
+  <sql id="Blob_Column_List">
+    log_param
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yed.system.model.Log">
+    insert into sys_log (id, log_url, log_ip, 
+      log_agent, user_name, begin_time, 
+      end_time, log_param)
+    values (#{id,jdbcType=INTEGER}, #{logUrl,jdbcType=VARCHAR}, #{logIp,jdbcType=VARCHAR}, 
+      #{logAgent,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{logParam,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yed.system.model.Log">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="logUrl != null">
+        log_url,
+      </if>
+      <if test="logIp != null">
+        log_ip,
+      </if>
+      <if test="logAgent != null">
+        log_agent,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="logParam != null">
+        log_param,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="logUrl != null">
+        #{logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null">
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logAgent != null">
+        #{logAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logParam != null">
+        #{logParam,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yed.system.model.Log">
+    update sys_log
+    <set>
+      <if test="logUrl != null">
+        log_url = #{logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null">
+        log_ip = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logAgent != null">
+        log_agent = #{logAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logParam != null">
+        log_param = #{logParam,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yed.system.model.Log">
+    update sys_log
+    set log_url = #{logUrl,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_agent = #{logAgent,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      log_param = #{logParam,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yed.system.model.Log">
+    update sys_log
+    set log_url = #{logUrl,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_agent = #{logAgent,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="ResultMap" >
+        select
+          <include refid="Column_List"/>
+        from sys_log
+    </select>
+
+    <select id="findTByPage" resultMap="ResultMap" parameterType="com.yed.common.model.Page">
+        select
+          <include refid="Column_List"/>
+        from sys_log ORDER BY begin_time DESC
+        limit  #{first}, #{pageSize}
+    </select>
+  
+    <select id="findTCountByT" resultType="java.lang.Integer">
+      select count(*) from sys_log
+    </select>
+</mapper>
