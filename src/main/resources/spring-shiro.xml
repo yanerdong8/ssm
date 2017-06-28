@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd"
+       default-lazy-init="true">
+
+    <description>Shiro安全配置</description>
+
+    <!--安全管理器-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--设置自定义Realm-->
+        <property name="realm" ref="shiroDbRealm"/>
+        <!--将缓存管理器，交给安全管理器-->
+        <property name="cacheManager" ref="shiroSpringCacheManager"/>
+        <!-- 记住密码管理 -->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!-- 項目自定义的Realm -->
+    <bean id="shiroDbRealm" class="com.yed.common.shiro.ShiroDbRealm">
+        <constructor-arg index="0" name="cacheManager" ref="shiroSpringCacheManager"/>
+        <constructor-arg index="1" name="matcher" ref="credentialsMatcher"/>
+        <!-- 启用身份验证缓存，即缓存AuthenticationInfo信息，默认false -->
+        <property name="authenticationCachingEnabled" value="true"/>
+        <!-- 缓存AuthenticationInfo信息的缓存名称 -->
+        <property name="authenticationCacheName" value="${shiro.authentication.cacheName}"/>
+        <!-- 缓存AuthorizationInfo信息的缓存名称 -->
+        <property name="authorizationCacheName" value="${shiro.authorization.cacheName}"/>
+    </bean>
+
+    <!-- 记住密码Cookie -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="httpOnly" value="true"/>
+        <!-- 7天,采用spring el计算方便修改[细节决定成败]！ -->
+        <property name="maxAge" value="#{7 * 24 * 60 * 60}"/>
+    </bean>
+
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('6ZW/55Ge5Y2O6YCaAAAAAA==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+    <!-- 密码错误5次锁定半小时 -->
+    <bean id="credentialsMatcher" class="com.yed.common.shiro.RetryLimitCredentialsMatcher">
+        <constructor-arg ref="shiroSpringCacheManager"/>
+        <property name="retryLimitCacheName" value="${shiro.retry.cacheName}"/>
+       <property name="passwordHash" ref="passwordHash"/>
+    </bean>
+
+    <!-- shiro密码加密配置 -->
+    <bean id="passwordHash" class="com.yed.common.shiro.PasswordHash">
+        <!-- 密码加密 1次md5,增强密码可修改此处 -->
+        <property name="algorithmName" value="md5"/>
+        <property name="hashIterations" value="1"/>
+    </bean>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 安全管理器 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 默认的登陆访问url -->
+        <property name="loginUrl" value="/login"/>
+        <!-- 登陆成功后跳转的url -->
+        <property name="successUrl" value="/"/>
+        <!-- 没有权限跳转的url -->
+        <property name="unauthorizedUrl" value="/unauth"/>
+        <property name="filterChainDefinitions">
+            <value>
+                <!--
+                    anon  不需要认证
+                    authc 需要认证
+                    user  验证通过或RememberMe登录的都可以
+                -->
+                /static/** = anon
+                /upload/** = anon
+                /mp/** = anon
+                /login.do = anon
+                /oauth2ScopeUserinfo = anon
+                /admin/** = authc
+            </value>
+        </property>
+    </bean>
+
+    <bean id="shiroSpringCacheManager" class="com.yed.common.shiro.ShiroSpringCacheManager">
+        <property name="cacheManager" ref="springCacheManager"/>
+    </bean>
+
+    <bean id="sessionManager"
+          class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- 设置全局会话超时时间10分钟 -->
+        <property name="globalSessionTimeout" value="#{10 * 60 * 1000}"/>
+        <!-- url上带sessionId 默认为true -->
+        <property name="sessionIdUrlRewritingEnabled" value="false"/>
+        <property name="sessionDAO" ref="cacheSessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+
+    <bean id="cacheSessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+        <property name="activeSessionsCacheName" value="${shiro.active.session.cacheName}"/>
+        <property name="cacheManager" ref="shiroSpringCacheManager"/>
+    </bean>
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
+       当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="shiroSessionId"/>
+    </bean>
+
+</beans>

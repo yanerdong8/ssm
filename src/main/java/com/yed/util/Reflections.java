@@ -1,4 +1,4 @@
-package com.yed.common.util;
+package com.yed.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

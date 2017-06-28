@@ -2,9 +2,10 @@ package com.yed.common.service.impl;
 
 import com.yed.common.dao.BaseMapper;
 import com.yed.common.service.BaseService;
-import com.yed.common.util.Reflections;
 import com.yed.common.model.Page;
 import com.yed.system.model.User;
+import com.yed.util.Reflections;
+
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
