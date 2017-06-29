@@ -52,4 +52,11 @@ public class LoginController extends BaseController{
         }
         return map;
     }
+	
+	@RequestMapping(value = "/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "login";
+    }
 }
