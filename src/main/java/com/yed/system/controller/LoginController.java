@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yed.common.controller.BaseController;
 
+//gitignore
+
 @Controller
 public class LoginController extends BaseController{
 	
