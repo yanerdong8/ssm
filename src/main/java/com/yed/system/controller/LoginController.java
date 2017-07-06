@@ -60,7 +60,7 @@ public class LoginController extends BaseController{
         return map;
     }
 	
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/logOut")
     public String logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();

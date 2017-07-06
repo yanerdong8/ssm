@@ -49,7 +49,7 @@
 						data-ajax-failure="$.BodyLoadFailure" data-ajax-mode="replace"
 						data-ajax-success="$.BodyLoadSuccess"
 						data-ajax-update="#body-content"
-						href="${pageContext.request.contextPath}/"><i class="fa fa-home"></i></a></li>
+						href="${pageContext.request.contextPath}/main"><i class="fa fa-home"></i></a></li>
 					<li class="active">首页</li>
 
 				</ol>
@@ -57,7 +57,7 @@
 				<div class="welinfo">
 					<span><img src="${pageContext.request.contextPath}/style/admin/assets/img/sun.png" alt=""></span>
 				  
-					<b>亲爱的用户,欢迎您使用${configVo.name},祝您工作愉快!</b>
+					<b>亲爱的用户,欢迎您使用,祝您工作愉快!</b>
 				</div> 
 				<div class="welinfo">
 					<span><img src="${pageContext.request.contextPath}/style/admin/assets/img/time.png" alt="时间"></span> <i>您上次登录的时间：
