@@ -4,34 +4,25 @@
 	<!-- BEGIN SIDEBAR LEFT -->
 			<div class="sidebar-left sidebar-nicescroller">
 				<ul class="sidebar-menu">
-					  
-					<c:forEach var="item" items="${menulist}">
 					   <li>
-						<c:if test="${empty item.murl}">
 						<a href="#fakelink">
 						<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
-							${item.name}
+							first
 						</a> 
-						</c:if>
-						<c:if test="${!empty item.murl}">
-						<a href="${pageContext.request.contextPath}${item.murl}?menuid=${item.id}&mpid=${item.pid}">
+						
+						<a href="www.baidu.com">
 						<i class="fa fa-table icon-sidebar"></i>
 							<i class="fa fa-angle-right chevron-icon-sidebar"></i>
-							${item.name}
+							second
 						</a> 
-						</c:if>
 						
 							
-						<ul class="submenu<c:if test="${mpid==item.id}"> visible</c:if>">
-							<c:forEach var="sitem" items="${permissions}">
-							   <c:if test="${item.id==sitem.pid}">
-							     <li class="<c:if test="${menuid==sitem.id}">active selected</c:if>"><a href="${pageContext.request.contextPath}${sitem.murl}?menuid=${sitem.id}&mpid=${sitem.pid}">${sitem.name}</a></li> 
-						       </c:if>
-						    </c:forEach>
+						<ul class="submenu">
+						<li>sub1</li>
+						<li>sub1</li>  
 						</ul>
 					  </li> 
-					</c:forEach> 
 				</ul>
 			</div><!-- /.sidebar-left -->
 			<!-- END SIDEBAR LEFT -->

@@ -21,6 +21,11 @@ import com.yed.common.controller.BaseController;
 @Controller
 public class LoginController extends BaseController{
 	
+	@RequestMapping(value = "/main")
+    public String index() {
+        return "system/main";
+    }
+	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome() {
         return "system/login";

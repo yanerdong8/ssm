@@ -7,7 +7,7 @@
      <title>首页</title> 
     
      <script type="text/javascript">
-     window.location.href="${pageContext.request.contextPath}/login";
+     window.location.href="${pageContext.request.contextPath}/welcome";
     	 
      </script>
      

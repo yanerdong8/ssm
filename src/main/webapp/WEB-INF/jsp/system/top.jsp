@@ -42,7 +42,7 @@
 							<li class="dropdown">
 							  <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="${pageContext.request.contextPath}/style/admin/assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="Avatar">
-								欢迎您, <strong>${sessionScope.adminUser.realname}</strong>
+								欢迎您, <strong>my god!</strong>
 							  </a>
 							  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
 								<!-- <li><a href="#fakelink">账号管理</a></li>   -->

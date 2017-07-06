@@ -14,41 +14,16 @@
 <title>登录</title>
 <jsp:include page="/style.jsp"></jsp:include>
 <script type="text/javascript">
-function changeImg() {
-    var imgSrc = $("#codeImg");
-    var src = imgSrc.attr("src");
-    imgSrc.attr("src", chgUrl(src));
-}  
 
-//加入时间戳，去缓存机制   
-function chgUrl(url) {
-    var timestamp = (new Date()).valueOf();if ((url.indexOf("&") >= 0)) {
-        url = url + "&timestamp=" + timestamp;
-    } else {
-        url = url + "?timestamp=" + timestamp;
-    }
-    return url;
-}
-document.onkeydown=function(event){
-       var e = event || window.event || arguments.callee.caller.arguments[0];
-              
-        if(e && e.keyCode==13){ // enter 键
-        	loginFun();
-       }
-   };
-	function loginFun(){ 
-		   
-	     if($("#username").val()==""){
-			layer.tips('请输入账号!', '#username');
-		 }else if($("#userPass").val()==""){
-			layer.tips('请输入密码!', '#userPass');
-		 }else if($("#userCode").val()==""){
-			layer.tips('请输验证码!', '#userCode');
-		 }else{
-			  window.location.href="${pageContext.request.contextPath}/list"; 				
-		 }
-	};
-</script>
+        function loginFun() {
+        	
+        	sendAjax("${pageContext.request.contextPath}/login", $("#myForm").serializeArray(), function(data){
+        			window.location.href = "${pageContext.request.contextPath}/main";
+        	
+        	});
+        }
+    </script>
+    
 </head>
 
 <body class="login tooltips">
@@ -61,15 +36,15 @@ document.onkeydown=function(event){
 	</div>
 	<div class="login-wrapper">
 		<div style="height: 20px"></div>	
-		<form role="form" id="myform" style="margin: 20px"> 
+		<form role="form" id="myForm" style="margin: 20px"> 
 			<div class="form-group has-feedback lg left-feedback no-label">
-				<input id="username" name="username" type="text" value=""
+				<input id="loginName" name="loginName" type="text" value=""
 					class="form-control no-border input-lg rounded"
 					placeholder="输入您的账号" autofocus> <span
 					class="fa fa-user form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback lg left-feedback no-label">
-				<input id="userPass" name="userpass" type="password"
+				<input id="password" name="password" type="password"
 					class="form-control no-border input-lg rounded"
 					placeholder="输入您的密码" value=""> <span
 					class="fa fa-unlock-alt form-control-feedback"></span>

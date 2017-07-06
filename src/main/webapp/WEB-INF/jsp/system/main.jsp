@@ -49,7 +49,7 @@
 						data-ajax-failure="$.BodyLoadFailure" data-ajax-mode="replace"
 						data-ajax-success="$.BodyLoadSuccess"
 						data-ajax-update="#body-content"
-						href="${pageContext.request.contextPath}/backgd/system/systemHome/home"><i class="fa fa-home"></i></a></li>
+						href="${pageContext.request.contextPath}/"><i class="fa fa-home"></i></a></li>
 					<li class="active">首页</li>
 
 				</ol>
@@ -61,7 +61,7 @@
 				</div> 
 				<div class="welinfo">
 					<span><img src="${pageContext.request.contextPath}/style/admin/assets/img/time.png" alt="时间"></span> <i>您上次登录的时间：
-						<fmt:formatDate value="${sessionScope.adminUser.lastLoginDate}" pattern="yyyy-MM-dd HH:mm"/> &nbsp;上次登录ip：${sessionScope.adminUser.lastLoginIp}</i>  
+						<fmt:formatDate value="hello xxx" pattern="yyyy-MM-dd HH:mm"/></i>  
 				</div> 
 				<div class="xline"></div> 
 			</div>
